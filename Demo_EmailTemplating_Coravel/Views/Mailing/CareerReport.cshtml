@@ -1,0 +1,61 @@
+﻿@using Microsoft.Extensions.Options
+@model Demo_EmailTemplating_Coravel.Models.Student
+@inject IOptionsSnapshot<EmailSettings> EmailSettings //It doesnt work
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CareerReport - @EmailSettings.Value.UniversityName</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <div>
+        <h4>Student from university @EmailSettings.Value.UniversityName</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StudentCode)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StudentCode)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Firstname)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Firstname)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Lastname)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Lastname)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Career)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Career)
+            </dd>
+        </dl>
+        <ul>
+            @{
+                foreach (var cycle in Model.Cycles)
+                {
+                    <li>
+                        @cycle.Period - @cycle.Grade
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</body>
+</html>
